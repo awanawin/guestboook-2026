@@ -11,6 +11,7 @@ return [
     | reset "broker" for your application. You may change these values
     | as required, but they're a perfect start for most applications.
     |
+    |
     */
 
     'defaults' => [
@@ -40,6 +41,12 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        // 🔐 GUARD BARU: Khusus nanganin Sesi Login Tenant/Pengguna SaaS lo
+        'pengguna' => [
+            'driver' => 'session',
+            'provider' => 'penggunas',
+        ],
     ],
 
     /*
@@ -65,10 +72,11 @@ return [
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        // 🗄️ PROVIDER BARU: Biar Guard Pengguna tahu dia harus baca ke model mana
+        'penggunas' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Pengguna::class,
+        ],
     ],
 
     /*
